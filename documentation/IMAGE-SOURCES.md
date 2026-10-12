@@ -17,3 +17,5 @@ The image library draws from these documented Unsplash collections and photo pag
 - [Retinol serum on display](https://unsplash.com/photos/retinol-serum-bottle-with-dropper-on-display-stand-tOv0V_U-qTs)
 
 Some photographs are editorial placeholders that show third-party packaging. They are not represented as photographs of the fictional product names. Replace every catalog image with the exact licensed packshot of the final merchandise before launching sales, and record the photographer, source page and license at download time.
+
+The October 2026 asset audit removed unrelated medical-treatment, nail, hair-care, superhero and rendered imagery. Remaining local photos are used only where their visible subject is compatible with the surrounding skincare context.

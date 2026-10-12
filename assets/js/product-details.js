@@ -5,7 +5,7 @@
   const product = getProduct(requested) || Products[0];
   const gallery = product.gallery || [product.image];
   const related = Products.filter(item => item.id !== product.id && (item.category === product.category || item.skin.some(type => product.skin.includes(type)))).slice(0, 4);
-  document.title = `${product.name} — Veloura Skin`;
+  document.title = `${product.name} — ${StoreConfig.brand}`;
 
   const structured = document.createElement('script');
   structured.type = 'application/ld+json';

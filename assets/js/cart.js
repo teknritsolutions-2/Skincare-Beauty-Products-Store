@@ -1,5 +1,5 @@
 (function () {
-  const KEY = 'veloura-cart';
+  const KEY = 'arenne-cart';
   const read = () => {
     try { return JSON.parse(localStorage.getItem(KEY)) || []; }
     catch { return []; }

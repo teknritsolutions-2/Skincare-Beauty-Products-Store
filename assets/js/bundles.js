@@ -1,11 +1,11 @@
 (function () {
   window.Bundles = [
-    { id: 'everyday', name: 'Everyday Essentials', ids: ['dew-gel-cleanser', 'daily-lotion', 'fluid-shield'], price: 3490, image: '../assets/images/bundles/bundle-1.jpg', skin: ['Normal', 'Combination'], note: 'A light morning foundation for skin that prefers breathable layers.' },
-    { id: 'hydration', name: 'Hydration Routine', ids: ['cloudmilk-cleanser', 'waterline-serum', 'ceramide-cloud'], price: 3690, image: '../assets/images/bundles/bundle-2.jpg', skin: ['Dry', 'Sensitive'], note: 'Comfort-focused cleansing, water-binding hydration and a plush finish.' },
-    { id: 'balanced', name: 'Balanced Skin Set', ids: ['dew-gel-cleanser', 'balance-niacinamide', 'water-gel'], price: 3290, image: '../assets/images/bundles/bundle-3.jpg', skin: ['Oily', 'Combination'], note: 'Fresh, light textures for routines navigating oil and dehydration.' },
-    { id: 'morning', name: 'Morning Routine', ids: ['morning-c-serum', 'daily-lotion', 'mineral-shield'], price: 3890, image: '../assets/images/bundles/bundle-4.jpg', skin: ['Normal', 'Dry'], note: 'An antioxidant layer, daily moisture and mineral sun protection.' },
-    { id: 'evening', name: 'Quiet Evening Set', ids: ['cleansing-balm', 'barrier-serum', 'squalane-cream'], price: 3850, image: '../assets/images/bundles/bundle-5.jpg', skin: ['Dry', 'Sensitive'], note: 'A soft-landing trio for removing the day and restoring comfort.' },
-    { id: 'travel', name: 'Travel Essentials', ids: ['oat-veil-cleanser', 'water-gel', 'fluid-shield'], price: 3190, image: '../assets/images/bundles/bundle-6.jpg', skin: ['All'], note: 'Three adaptable staples for a smaller, steadier travel routine.' }
+    { id: 'everyday', name: 'Everyday Essentials', ids: ['dew-gel-cleanser', 'daily-lotion', 'fluid-shield'], price: 3490, image: '../assets/images/home/hero.jpg', skin: ['Normal', 'Combination'], note: 'A light morning foundation for skin that prefers breathable layers.' },
+    { id: 'hydration', name: 'Hydration Routine', ids: ['cloudmilk-cleanser', 'waterline-serum', 'ceramide-cloud'], price: 3690, image: '../assets/images/home/category-3.jpg', skin: ['Dry', 'Sensitive'], note: 'Comfort-focused cleansing, water-binding hydration and a plush finish.' },
+    { id: 'balanced', name: 'Balanced Skin Set', ids: ['dew-gel-cleanser', 'balance-niacinamide', 'water-gel'], price: 3290, image: '../assets/images/home/category-4.jpg', skin: ['Oily', 'Combination'], note: 'Fresh, light textures for routines navigating oil and dehydration.' },
+    { id: 'morning', name: 'Morning Routine', ids: ['morning-c-serum', 'daily-lotion', 'mineral-shield'], price: 3890, image: '../assets/images/home/philosophy.jpg', skin: ['Normal', 'Dry'], note: 'An antioxidant layer, daily moisture and mineral sun protection.' },
+    { id: 'evening', name: 'Quiet Evening Set', ids: ['cleansing-balm', 'barrier-serum', 'squalane-cream'], price: 3850, image: '../assets/images/home/evening.jpg', skin: ['Dry', 'Sensitive'], note: 'A soft-landing trio for removing the day and restoring comfort.' },
+    { id: 'travel', name: 'Travel Essentials', ids: ['oat-veil-cleanser', 'water-gel', 'fluid-shield'], price: 3190, image: '../assets/images/home/journal.jpg', skin: ['All'], note: 'Three adaptable staples for a smaller, steadier travel routine.' }
   ];
   const root = document.querySelector('#bundleGrid');
   if (!root) return;

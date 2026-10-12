@@ -32,3 +32,13 @@
 [data-theme="dark"] .badge,
 [data-theme="dark"] .media-actions .btn { background: #eef2ef; color: #1b241f; }
 [data-theme="dark"] .notice { color: #cfe1d5; }
+[data-theme="dark"] .category-pill:hover,
+[data-theme="dark"] .category-pill.active,
+[data-theme="dark"] .guide-tab:hover,
+[data-theme="dark"] .guide-tab.active,
+[data-theme="dark"] .routine-switch button:hover,
+[data-theme="dark"] .routine-switch button.active,
+[data-theme="dark"] .skin-story:hover,
+[data-theme="dark"] .skin-story.active { background: #a9cbb7; border-color: #a9cbb7; color: #172119; }
+[data-theme="dark"] .skin-story:hover span,
+[data-theme="dark"] .skin-story.active span { color: #283b31; }

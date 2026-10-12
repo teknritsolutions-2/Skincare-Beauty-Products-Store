@@ -5,102 +5,62 @@
   const base = inPages ? '' : 'pages/';
   const asset = inPages ? '../assets/' : 'assets/';
   const page = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
+  const brand = window.StoreConfig.brand;
+  const isHome = page === 'index' || page === 'home2';
   const link = (file, label, className = '') => `<a class="${className} ${page === file.replace('.html', '') ? 'active' : ''}" href="${base}${file}">${label}</a>`;
+  const categories = ['Cleansers', 'Serums', 'Moisturizers', 'Sunscreens', 'Masks'];
 
   const header = `<a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header"><div class="nav-wrap">
-      <a href="${base}index.html" aria-label="Veloura Skin home"><img class="brand-logo logo-dynamic" src="${asset}brand/logo.svg" alt="Veloura Skin"></a>
+      <a class="brand-link" href="${base}index.html" aria-label="${brand} home"><img class="brand-logo logo-dynamic" src="${asset}brand/logo.svg" alt="${brand}"></a>
       <nav class="desktop-nav" aria-label="Main navigation">
-        <div class="nav-menu"><button class="nav-trigger" aria-expanded="false">Home ▾</button><ul class="dropdown"><li>${link('index.html', 'Storefront')}</li><li>${link('home2.html', 'The Journal Edit')}</li><li><a href="${base}index.html#skin-quiz">Skin finder</a></li></ul></div>
-        <div class="nav-menu"><button class="nav-trigger" aria-expanded="false">Shop ▾</button><ul class="dropdown"><li>${link('shop.html', 'Shop all')}</li>${['Cleansers', 'Serums', 'Moisturizers', 'Sunscreens', 'Masks'].map(category => `<li><a href="${base}shop.html?category=${encodeURIComponent(category)}">${category}</a></li>`).join('')}</ul></div>
-        ${link('ingredients.html', 'Ingredients', 'nav-link')}${link('skin-type-guide.html', 'Skin Guide', 'nav-link')}${link('bundles.html', 'Bundles', 'nav-link')}${link('about.html', 'About', 'nav-link')}${link('contact.html', 'Consultation', 'nav-link')}
+        <div class="nav-menu ${isHome ? 'current' : ''}"><button class="nav-trigger" type="button" aria-expanded="false" aria-haspopup="true">Home <span aria-hidden="true">⌄</span></button><ul class="dropdown"><li>${link('index.html', 'Home 1')}</li><li>${link('home2.html', 'Home 2')}</li></ul></div>
+        ${link('about.html', 'About', 'nav-link')}
+        ${link('shop.html', 'Shop', 'nav-link')}
+        ${link('ingredients.html', 'Ingredients', 'nav-link')}
+        ${link('skin-type-guide.html', 'Skin Guide', 'nav-link')}
+        ${link('bundles.html', 'Bundles', 'nav-link')}
+        ${link('contact.html', 'Contact', 'nav-link')}
       </nav>
-      <div class="nav-actions">
-        <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode" title="Theme">◐</button>
-        <button class="icon-btn dir-toggle" type="button" aria-label="Toggle text direction" title="Direction">LTR</button>
-        <button class="icon-btn bag-button" type="button" aria-label="Open shopping bag" aria-expanded="false">Bag<span class="bag-count">0</span></button>
-        <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
-      </div>
+      <div class="nav-actions"><button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode" title="Theme">◐</button><button class="icon-btn dir-toggle" type="button" aria-label="Toggle text direction" title="Direction">LTR</button><button class="icon-btn bag-button" type="button" aria-label="Open shopping bag" aria-expanded="false">Bag<span class="bag-count">0</span></button><button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button></div>
     </div></header>
-    <aside class="mobile-panel" aria-label="Mobile menu" aria-hidden="true"><ul class="mobile-links">
-      <li>${link('index.html', 'Storefront')}</li><li>${link('home2.html', 'The Journal Edit')}</li><li><a href="${base}index.html#skin-quiz">Skin finder</a></li><li>${link('shop.html', 'Shop all')}</li>
-      <li class="mobile-sub">${['Cleansers', 'Serums', 'Moisturizers', 'Sunscreens', 'Masks'].map(category => `<a href="${base}shop.html?category=${category}">${category}</a>`).join('')}</li>
-      <li>${link('ingredients.html', 'Ingredients Transparency')}</li><li>${link('skin-type-guide.html', 'Skin Type Guide')}</li><li>${link('bundles.html', 'Bundle Deals')}</li><li>${link('about.html', 'About')}</li><li>${link('contact.html', 'Consultation')}</li><li>${link('cart.html', 'View shopping bag')}</li>
-    </ul><div class="mobile-controls"><button class="btn btn-outline theme-toggle" type="button">Theme</button><button class="btn btn-outline dir-toggle" type="button">LTR / RTL</button></div></aside>`;
+    <aside class="mobile-panel" aria-label="Mobile menu" aria-hidden="true"><div class="mobile-brand"><img class="brand-logo logo-dynamic" src="${asset}brand/logo.svg" alt="${brand}"></div><ul class="mobile-links">
+      <li class="mobile-home"><button class="mobile-section-toggle ${isHome ? 'active' : ''}" type="button" aria-expanded="false">Home <span aria-hidden="true">+</span></button><ul hidden><li>${link('index.html', 'Home 1')}</li><li>${link('home2.html', 'Home 2')}</li></ul></li>
+      <li>${link('about.html', 'About')}</li>
+      <li class="mobile-shop"><a class="${page === 'shop' ? 'active' : ''}" href="${base}shop.html">Shop</a><div class="mobile-sub" aria-label="Shop categories">${categories.map(category => `<a href="${base}shop.html?category=${encodeURIComponent(category)}">${category}</a>`).join('')}</div></li>
+      <li>${link('ingredients.html', 'Ingredients')}</li><li>${link('skin-type-guide.html', 'Skin Guide')}</li><li>${link('bundles.html', 'Bundles')}</li><li>${link('contact.html', 'Contact')}</li>
+    </ul><div class="mobile-controls"><button class="btn btn-outline theme-toggle" type="button">Theme</button><button class="btn btn-outline dir-toggle" type="button">LTR</button><a class="btn btn-primary" href="${base}cart.html">View bag</a></div></aside>`;
 
-  const cartShell = `<button class="cart-backdrop" type="button" aria-label="Close shopping bag" tabindex="-1"></button>
-    <aside class="mini-cart" aria-label="Shopping bag" aria-hidden="true">
-      <div class="mini-cart-head"><h2>Your bag <span class="mini-cart-count"></span></h2><button class="icon-btn close-cart" type="button" aria-label="Close shopping bag">✕</button></div>
-      <div class="mini-cart-body" aria-live="polite"></div>
-      <div class="mini-cart-foot"><div class="mini-cart-total"><span>Subtotal</span><strong>₹0</strong></div><div class="actions"><a class="btn btn-primary btn-block" href="${base}cart.html">View bag</a><button class="btn btn-text continue-shopping" type="button">Continue shopping</button></div></div>
-    </aside>`;
-
-  const footer = `<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><img src="${asset}brand/logo-white.svg" alt="Veloura Skin" width="188"><p>A clearer way to shop skincare—by routine, skin feel and ingredient role.</p></div><div><h3>Shop</h3><ul><li><a href="${base}shop.html">All products</a></li>${['Cleansers', 'Serums', 'Moisturizers', 'Sunscreens', 'Masks'].map(category => `<li><a href="${base}shop.html?category=${category}">${category}</a></li>`).join('')}<li><a href="${base}bundles.html">Bundles</a></li></ul></div><div><h3>Discover</h3><ul><li><a href="${base}index.html#skin-quiz">Skin finder</a></li><li><a href="${base}ingredients.html">Ingredients</a></li><li><a href="${base}skin-type-guide.html">Skin guide</a></li><li><a href="${base}home2.html">Journal edit</a></li><li><a href="${base}about.html">About</a></li></ul></div><div><h3>Help</h3><ul><li><a href="${base}contact.html">Consultation</a></li><li><a href="${base}faq.html">FAQ</a></li><li><a href="${base}shipping-returns.html">Shipping & returns</a></li><li><a href="${base}cart.html">Shopping bag</a></li></ul></div><div><h3>Legal</h3><ul><li><a href="${base}privacy.html">Privacy</a></li><li><a href="${base}terms.html">Terms</a></li></ul></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Veloura Skin.</span><span>General skincare information only — not medical advice.</span></div></footer><button class="back-top" type="button" aria-label="Back to top">↑</button>`;
+  const cartShell = `<button class="cart-backdrop" type="button" aria-label="Close shopping bag" tabindex="-1"></button><aside class="mini-cart" aria-label="Shopping bag" aria-hidden="true"><div class="mini-cart-head"><h2>Your bag <span class="mini-cart-count"></span></h2><button class="icon-btn close-cart" type="button" aria-label="Close shopping bag">✕</button></div><div class="mini-cart-body" aria-live="polite"></div><div class="mini-cart-foot"><div class="mini-cart-total"><span>Subtotal</span><strong>₹0</strong></div><div class="actions"><a class="btn btn-primary btn-block" href="${base}cart.html">View bag</a><button class="btn btn-text continue-shopping" type="button">Continue shopping</button></div></div></aside>`;
+  const footer = `<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><img src="${asset}brand/logo-white.svg" alt="${brand}" width="188"><p>A clearer way to shop skincare—by routine, skin feel and ingredient role.</p></div><div><h3>Shop</h3><ul><li><a href="${base}shop.html">All products</a></li>${categories.map(category => `<li><a href="${base}shop.html?category=${encodeURIComponent(category)}">${category}</a></li>`).join('')}<li><a href="${base}bundles.html">Bundles</a></li></ul></div><div><h3>Discover</h3><ul><li><a href="${base}index.html#skin-quiz">Skin finder</a></li><li><a href="${base}ingredients.html">Ingredients</a></li><li><a href="${base}skin-type-guide.html">Skin guide</a></li><li><a href="${base}home2.html">Home 2</a></li><li><a href="${base}about.html">About</a></li></ul></div><div><h3>Help</h3><ul><li><a href="${base}contact.html">Contact</a></li><li><a href="${base}faq.html">FAQ</a></li><li><a href="${base}shipping-returns.html">Shipping & returns</a></li><li><a href="${base}cart.html">Shopping bag</a></li></ul></div><div><h3>Legal</h3><ul><li><a href="${base}privacy.html">Privacy</a></li><li><a href="${base}terms.html">Terms</a></li></ul></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} ${brand}.</span><span>General skincare information only — not medical advice.</span></div></footer><button class="back-top" type="button" aria-label="Back to top">↑</button>`;
 
   document.body.insertAdjacentHTML('afterbegin', header);
   document.body.insertAdjacentHTML('beforeend', cartShell + footer);
-
-  if (!document.querySelector('link[rel="canonical"]')) {
-    const canonical = document.createElement('link'); canonical.rel = 'canonical'; canonical.href = location.origin + location.pathname; document.head.appendChild(canonical);
-  }
-  const applyTheme = theme => {
-    root.dataset.theme = theme;
-    document.querySelectorAll('.logo-dynamic').forEach(image => { image.src = asset + `brand/logo${theme === 'dark' ? '-white' : ''}.svg`; });
-  };
-  applyTheme(localStorage.getItem('veloura-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-  root.dir = localStorage.getItem('veloura-dir') || 'ltr'; root.lang = 'en';
-  document.querySelectorAll('.theme-toggle').forEach(button => button.addEventListener('click', () => { const theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('veloura-theme', theme); applyTheme(theme); }));
+  if (!document.querySelector('link[rel="canonical"]')) { const canonical = document.createElement('link'); canonical.rel = 'canonical'; canonical.href = location.origin + location.pathname; document.head.appendChild(canonical); }
+  const applyTheme = theme => { root.dataset.theme = theme; document.querySelectorAll('.logo-dynamic').forEach(image => { image.src = asset + `brand/logo${theme === 'dark' ? '-white' : ''}.svg`; }); };
+  applyTheme(localStorage.getItem('arenne-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  root.dir = localStorage.getItem('arenne-dir') || 'ltr'; root.lang = 'en';
+  document.querySelectorAll('.theme-toggle').forEach(button => button.addEventListener('click', () => { const theme = root.dataset.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('arenne-theme', theme); applyTheme(theme); }));
   const updateDirLabels = () => document.querySelectorAll('.dir-toggle').forEach(button => { button.textContent = root.dir.toUpperCase(); });
-  document.querySelectorAll('.dir-toggle').forEach(button => button.addEventListener('click', () => { root.dir = root.dir === 'rtl' ? 'ltr' : 'rtl'; localStorage.setItem('veloura-dir', root.dir); updateDirLabels(); })); updateDirLabels();
+  document.querySelectorAll('.dir-toggle').forEach(button => button.addEventListener('click', () => { root.dir = root.dir === 'rtl' ? 'ltr' : 'rtl'; localStorage.setItem('arenne-dir', root.dir); updateDirLabels(); })); updateDirLabels();
 
-  const mobilePanel = document.querySelector('.mobile-panel');
-  const menuToggle = document.querySelector('.menu-toggle');
+  const mobilePanel = document.querySelector('.mobile-panel'); const menuToggle = document.querySelector('.menu-toggle'); const mobileHomeToggle = document.querySelector('.mobile-section-toggle');
   function closeMenu() { mobilePanel.classList.remove('open'); mobilePanel.setAttribute('aria-hidden', 'true'); document.body.classList.remove('nav-open'); menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.textContent = '☰'; }
-  menuToggle.addEventListener('click', () => { const open = !mobilePanel.classList.contains('open'); if (!open) return closeMenu(); mobilePanel.classList.add('open'); mobilePanel.setAttribute('aria-hidden', 'false'); document.body.classList.add('nav-open'); menuToggle.setAttribute('aria-expanded', 'true'); menuToggle.textContent = '✕'; mobilePanel.querySelector('a')?.focus(); });
-  document.querySelectorAll('.nav-trigger').forEach(button => button.addEventListener('click', () => { const menu = button.parentElement; const open = !menu.classList.contains('open'); document.querySelectorAll('.nav-menu').forEach(item => item.classList.remove('open')); menu.classList.toggle('open', open); button.setAttribute('aria-expanded', String(open)); }));
-  document.addEventListener('click', event => {
-    if (!event.target.closest('.nav-menu')) document.querySelectorAll('.nav-menu').forEach(menu => { menu.classList.remove('open'); menu.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false'); });
-  });
+  menuToggle.addEventListener('click', () => { const open = !mobilePanel.classList.contains('open'); if (!open) return closeMenu(); mobilePanel.classList.add('open'); mobilePanel.setAttribute('aria-hidden', 'false'); document.body.classList.add('nav-open'); menuToggle.setAttribute('aria-expanded', 'true'); menuToggle.textContent = '✕'; mobileHomeToggle.focus(); });
+  mobileHomeToggle.addEventListener('click', () => { const submenu = mobileHomeToggle.nextElementSibling; const open = submenu.hidden; submenu.hidden = !open; mobileHomeToggle.setAttribute('aria-expanded', String(open)); mobileHomeToggle.querySelector('span').textContent = open ? '−' : '+'; });
+  document.querySelectorAll('.nav-trigger').forEach(button => button.addEventListener('click', () => { const menu = button.parentElement; const open = !menu.classList.contains('open'); document.querySelectorAll('.nav-menu').forEach(item => { item.classList.remove('open'); item.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false'); }); menu.classList.toggle('open', open); button.setAttribute('aria-expanded', String(open)); }));
+  document.addEventListener('click', event => { if (!event.target.closest('.nav-menu')) document.querySelectorAll('.nav-menu').forEach(menu => { menu.classList.remove('open'); menu.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false'); }); if (mobilePanel.classList.contains('open') && !event.target.closest('.mobile-panel') && !event.target.closest('.menu-toggle')) closeMenu(); });
 
-  const miniCart = document.querySelector('.mini-cart');
-  const bagButton = document.querySelector('.bag-button');
-  let previousFocus = null;
+  const miniCart = document.querySelector('.mini-cart'); const bagButton = document.querySelector('.bag-button'); let previousFocus = null;
   function itemData(item) { return item.type === 'bundle' ? item : getProduct(item.id); }
-  function renderCart() {
-    const items = Cart.items();
-    const count = Cart.count();
-    document.querySelectorAll('.bag-count').forEach(element => { element.textContent = count; });
-    document.querySelector('.mini-cart-count').textContent = `(${count})`;
-    document.querySelector('.mini-cart-total strong').textContent = `₹${Cart.total().toLocaleString('en-IN')}`;
-    const body = document.querySelector('.mini-cart-body');
-    body.innerHTML = items.length ? items.map(item => { const product = itemData(item); return `<article class="mini-cart-item"><img src="${product.image}" alt="${product.name}"><div><span class="product-kicker">${item.type === 'bundle' ? 'Routine bundle' : product.category}</span><h3>${product.name}</h3><div class="mini-cart-line"><div class="mini-qty"><button type="button" data-cart-change="-1" data-key="${item.key}" aria-label="Decrease quantity">−</button><span>${item.qty}</span><button type="button" data-cart-change="1" data-key="${item.key}" aria-label="Increase quantity">+</button></div><strong>₹${(product.price * item.qty).toLocaleString('en-IN')}</strong></div><button class="remove-mini" type="button" data-cart-remove="${item.key}">Remove</button></div></article>`; }).join('') : `<div class="mini-cart-empty"><span class="eyebrow">Nothing here yet</span><h3>Your shelf is ready.</h3><p>Explore products by skin feel, category or ingredient.</p><a class="btn btn-primary" href="${base}shop.html">Shop collection</a></div>`;
-  }
+  function renderCart() { const items = Cart.items(); const count = Cart.count(); document.querySelectorAll('.bag-count').forEach(element => { element.textContent = count; }); document.querySelector('.mini-cart-count').textContent = `(${count})`; document.querySelector('.mini-cart-total strong').textContent = `₹${Cart.total().toLocaleString('en-IN')}`; const body = document.querySelector('.mini-cart-body'); body.innerHTML = items.length ? items.map(item => { const product = itemData(item); return `<article class="mini-cart-item"><img src="${product.image}" alt="${product.name}"><div><span class="product-kicker">${item.type === 'bundle' ? 'Routine bundle' : product.category}</span><h3>${product.name}</h3><div class="mini-cart-line"><div class="mini-qty"><button type="button" data-cart-change="-1" data-key="${item.key}" aria-label="Decrease quantity">−</button><span>${item.qty}</span><button type="button" data-cart-change="1" data-key="${item.key}" aria-label="Increase quantity">+</button></div><strong>₹${(product.price * item.qty).toLocaleString('en-IN')}</strong></div><button class="remove-mini" type="button" data-cart-remove="${item.key}">Remove</button></div></article>`; }).join('') : `<div class="mini-cart-empty"><span class="eyebrow">Nothing here yet</span><h3>Your shelf is ready.</h3><p>Explore products by skin feel, category or ingredient.</p><a class="btn btn-primary" href="${base}shop.html">Shop collection</a></div>`; }
   function openCart() { previousFocus = document.activeElement; renderCart(); document.body.classList.add('cart-open'); miniCart.setAttribute('aria-hidden', 'false'); bagButton.setAttribute('aria-expanded', 'true'); miniCart.querySelector('.close-cart').focus(); }
   function closeCart() { document.body.classList.remove('cart-open'); miniCart.setAttribute('aria-hidden', 'true'); bagButton.setAttribute('aria-expanded', 'false'); previousFocus?.focus(); }
-  bagButton.addEventListener('click', openCart);
-  document.addEventListener('cart:open', openCart);
-  document.addEventListener('cart:updated', renderCart);
-  document.querySelector('.close-cart').addEventListener('click', closeCart);
-  document.querySelector('.cart-backdrop').addEventListener('click', closeCart);
-  document.querySelector('.continue-shopping').addEventListener('click', closeCart);
-  miniCart.addEventListener('click', event => {
-    const change = event.target.closest('[data-cart-change]');
-    const remove = event.target.closest('[data-cart-remove]');
-    if (change) { const item = Cart.items().find(entry => entry.key === change.dataset.key); if (item) Cart.update(item.key, item.qty + Number(change.dataset.cartChange)); }
-    if (remove) Cart.remove(remove.dataset.cartRemove);
-  });
-  renderCart();
-
+  bagButton.addEventListener('click', openCart); document.addEventListener('cart:open', openCart); document.addEventListener('cart:updated', renderCart); document.querySelector('.close-cart').addEventListener('click', closeCart); document.querySelector('.cart-backdrop').addEventListener('click', closeCart); document.querySelector('.continue-shopping').addEventListener('click', closeCart);
+  miniCart.addEventListener('click', event => { const change = event.target.closest('[data-cart-change]'); const remove = event.target.closest('[data-cart-remove]'); if (change) { const item = Cart.items().find(entry => entry.key === change.dataset.key); if (item) Cart.update(item.key, item.qty + Number(change.dataset.cartChange)); } if (remove) Cart.remove(remove.dataset.cartRemove); }); renderCart();
   document.addEventListener('click', event => { const button = event.target.closest('.accordion-btn'); if (button) { const item = button.parentElement; item.classList.toggle('open'); button.setAttribute('aria-expanded', String(item.classList.contains('open'))); } });
-  const backTop = document.querySelector('.back-top');
-  addEventListener('scroll', () => backTop.classList.toggle('show', scrollY > 500), { passive: true });
-  backTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
-
-  const observer = 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches ? new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } }), { threshold: .12 }) : null;
-  document.querySelectorAll('[data-reveal]').forEach((element, index) => { element.style.setProperty('--delay', `${Math.min(index % 4, 3) * 80}ms`); if (observer) observer.observe(element); else element.classList.add('revealed'); });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { closeMenu(); if (document.body.classList.contains('cart-open')) closeCart(); document.querySelectorAll('.nav-menu').forEach(menu => menu.classList.remove('open')); }
-    if (event.key === 'Tab' && document.body.classList.contains('cart-open')) { const focusable = [...miniCart.querySelectorAll('button,a')].filter(element => !element.disabled); const first = focusable[0], last = focusable.at(-1); if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); } }
-  });
+  const backTop = document.querySelector('.back-top'); addEventListener('scroll', () => backTop.classList.toggle('show', scrollY > 500), { passive: true }); backTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+  const observer = 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches ? new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } }), { threshold: .1 }) : null;
+  document.querySelectorAll('[data-reveal]').forEach((element, index) => { element.style.setProperty('--delay', `${Math.min(index % 4, 3) * 70}ms`); if (observer) observer.observe(element); else element.classList.add('revealed'); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeMenu(); if (document.body.classList.contains('cart-open')) closeCart(); document.querySelectorAll('.nav-menu').forEach(menu => { menu.classList.remove('open'); menu.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false'); }); } if (event.key === 'Tab' && document.body.classList.contains('cart-open')) { const focusable = [...miniCart.querySelectorAll('button,a')].filter(element => !element.disabled); const first = focusable[0], last = focusable.at(-1); if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); } } });
 })();

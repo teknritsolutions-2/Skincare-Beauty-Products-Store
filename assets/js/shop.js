@@ -6,13 +6,14 @@
   const state = {
     category: params.get('category') || 'All', skin: params.get('skin') || 'All',
     ingredient: params.get('ingredient') || 'All', available: params.get('available') === 'true',
-    price: Number(params.get('price')) || 2500, sort: params.get('sort') || 'featured'
+    price: Number(params.get('price')) || 2500, sort: params.get('sort') || 'featured', query: params.get('q') || ''
   };
   const form = document.querySelector('#filters');
   const count = document.querySelector('#resultCount');
   const sort = document.querySelector('#sortProducts');
   const drawer = document.querySelector('#filterDrawer');
   const toggle = document.querySelector('.filter-toggle');
+  const search = document.querySelector('#productSearch');
 
   function syncControls() {
     form.elements.category.value = state.category;
@@ -21,6 +22,7 @@
     form.elements.available.checked = state.available;
     form.elements.price.value = state.price;
     sort.value = state.sort;
+    search.value = state.query;
     document.querySelector('#priceValue').textContent = `₹${state.price.toLocaleString('en-IN')}`;
     document.querySelectorAll('[data-category-pill]').forEach(button => button.classList.toggle('active', button.dataset.categoryPill === state.category));
   }
@@ -30,6 +32,7 @@
     ['category', 'skin', 'ingredient', 'sort'].forEach(key => state[key] === 'All' || state[key] === 'featured' ? url.searchParams.delete(key) : url.searchParams.set(key, state[key]));
     state.available ? url.searchParams.set('available', 'true') : url.searchParams.delete('available');
     state.price < 2500 ? url.searchParams.set('price', String(state.price)) : url.searchParams.delete('price');
+    state.query ? url.searchParams.set('q', state.query) : url.searchParams.delete('q');
     history.replaceState({}, '', url);
   }
 
@@ -38,7 +41,8 @@
       (state.category === 'All' || product.category === state.category) &&
       (state.skin === 'All' || product.skin.includes(state.skin) || product.skin.includes('All')) &&
       (state.ingredient === 'All' || product.ingredients.includes(state.ingredient)) &&
-      (!state.available || product.available) && product.price <= state.price
+      (!state.available || product.available) && product.price <= state.price &&
+      (!state.query || [product.name, product.category, product.description, ...product.ingredients, ...product.concerns].join(' ').toLowerCase().includes(state.query.toLowerCase()))
     );
     const sorts = {
       'price-low': (a, b) => a.price - b.price, 'price-high': (a, b) => b.price - a.price,
@@ -51,7 +55,7 @@
   }
 
   function reset() {
-    Object.assign(state, { category: 'All', skin: 'All', ingredient: 'All', available: false, price: 2500, sort: 'featured' });
+    Object.assign(state, { category: 'All', skin: 'All', ingredient: 'All', available: false, price: 2500, sort: 'featured', query: '' });
     render();
   }
   function closeFilters() {
@@ -66,6 +70,7 @@
     render();
   });
   sort.addEventListener('change', () => { state.sort = sort.value; render(); });
+  search.addEventListener('input', () => { state.query = search.value.trim(); render(); });
   document.querySelectorAll('[data-category-pill]').forEach(button => button.addEventListener('click', () => { state.category = button.dataset.categoryPill; render(); }));
   ['#clearFilters', '#desktopClearFilters'].forEach(selector => document.querySelector(selector).addEventListener('click', reset));
   document.querySelector('#applyFilters').addEventListener('click', closeFilters);

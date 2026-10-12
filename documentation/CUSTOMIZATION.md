@@ -2,7 +2,7 @@
 
 ## Brand
 
-Change `StoreConfig.brand` in `assets/js/products.js`, visible copy in the shared header/footer within `assets/js/main.js`, and the four SVGs in `assets/brand/`.
+Change `StoreConfig.brand` in `assets/js/products.js`; the shared header and footer read that value automatically. Update page titles and the four SVGs in `assets/brand/` when adopting a final identity.
 
 ## Colors and type
 

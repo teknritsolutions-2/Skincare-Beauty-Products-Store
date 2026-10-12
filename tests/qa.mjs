@@ -16,7 +16,16 @@ for(const file of fs.readdirSync(path.join(root,'pages')).filter(x=>x.endsWith('
  if(html.includes('${'))errors.push(`${file}: unrendered template expression`);
 }
 const code=fs.readFileSync(path.join(root,'assets/js/products.js'),'utf8');const context={window:{},console};vm.createContext(context);vm.runInContext(code,context);if(context.window.Products.length!==24)errors.push(`Expected 24 products, got ${context.window.Products.length}`);
+if(context.window.StoreConfig.brand!=='Arenne Skin')errors.push('Shared brand config is not Arenne Skin');
 const ids=new Set(context.window.Products.map(p=>p.id));if(ids.size!==24)errors.push('Duplicate product IDs');
 for(const p of context.window.Products){const image=path.resolve(root,'pages',p.image);if(!fs.existsSync(image))errors.push(`Missing product image for ${p.id}`)}
+const main=fs.readFileSync(path.join(root,'assets/js/main.js'),'utf8');
+const navTokens=["Home <span", "link('about.html', 'About'", "link('shop.html', 'Shop'", "link('ingredients.html', 'Ingredients'", "link('skin-type-guide.html', 'Skin Guide'", "link('bundles.html', 'Bundles'", "link('contact.html', 'Contact'"];
+let previous=-1;for(const token of navTokens){const current=main.indexOf(token);if(current<0||current<previous)errors.push('Desktop navigation order does not match the required sequence');previous=current}
+const homeMenu=main.slice(main.indexOf('<ul class="dropdown">'),main.indexOf('</ul></div>'));
+if(!homeMenu.includes("'Home 1'")||!homeMenu.includes("'Home 2'")||homeMenu.includes('Skin finder'))errors.push('Home dropdown must contain only Home 1 and Home 2');
+if(fs.existsSync(path.join(root,'pages/skin-quiz.html')))errors.push('Standalone quiz page should remain removed');
+const textFiles=['README.md','index.html',...required,...fs.readdirSync(path.join(root,'documentation')).filter(file=>file.endsWith('.md')).map(file=>`documentation/${file}`)];
+for(const file of textFiles){if(fs.readFileSync(path.join(root,file),'utf8').match(/Veloura/i))errors.push(`Legacy brand reference in ${file}`)}
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log(`QA passed: ${required.length} required files, 17 pages, ${context.window.Products.length} unique products, local references resolved.`);
+console.log(`QA passed: ${required.length} required files, 17 pages, exact navigation, clean brand references, ${context.window.Products.length} unique products, local references resolved.`);
