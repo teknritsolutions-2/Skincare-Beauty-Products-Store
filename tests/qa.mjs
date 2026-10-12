@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 const root=path.resolve(import.meta.dirname,'..');
-const required=['assets/css/style.css','assets/css/dark-mode.css','assets/css/rtl.css','assets/js/main.js','assets/js/products.js','assets/js/shop.js','assets/js/product-details.js','assets/js/quiz.js','assets/js/bundles.js','assets/js/cart.js','assets/js/forms.js','pages/index.html','pages/home2.html','pages/about.html','pages/shop.html','pages/product-details.html','pages/ingredients.html','pages/skin-type-guide.html','pages/skin-quiz.html','pages/bundles.html','pages/cart.html','pages/checkout.html','pages/contact.html','pages/faq.html','pages/privacy.html','pages/terms.html','pages/shipping-returns.html','pages/coming-soon.html','pages/404.html'];
+const required=['assets/css/style.css','assets/css/dark-mode.css','assets/css/rtl.css','assets/js/main.js','assets/js/products.js','assets/js/shop.js','assets/js/product-details.js','assets/js/quiz.js','assets/js/bundles.js','assets/js/cart.js','assets/js/forms.js','assets/js/home.js','pages/index.html','pages/home2.html','pages/about.html','pages/shop.html','pages/product-details.html','pages/ingredients.html','pages/skin-type-guide.html','pages/bundles.html','pages/cart.html','pages/checkout.html','pages/contact.html','pages/faq.html','pages/privacy.html','pages/terms.html','pages/shipping-returns.html','pages/coming-soon.html','pages/404.html'];
 const errors=[];
 for(const file of required)if(!fs.existsSync(path.join(root,file)))errors.push(`Missing ${file}`);
 for(const file of fs.readdirSync(path.join(root,'pages')).filter(x=>x.endsWith('.html'))){
@@ -19,4 +19,4 @@ const code=fs.readFileSync(path.join(root,'assets/js/products.js'),'utf8');const
 const ids=new Set(context.window.Products.map(p=>p.id));if(ids.size!==24)errors.push('Duplicate product IDs');
 for(const p of context.window.Products){const image=path.resolve(root,'pages',p.image);if(!fs.existsSync(image))errors.push(`Missing product image for ${p.id}`)}
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log(`QA passed: ${required.length} required files, 18 pages, ${context.window.Products.length} unique products, local references resolved.`);
+console.log(`QA passed: ${required.length} required files, 17 pages, ${context.window.Products.length} unique products, local references resolved.`);

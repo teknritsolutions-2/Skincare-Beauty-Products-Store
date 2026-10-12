@@ -28,5 +28,18 @@
     {id:'weekend-mask',name:'Weekend Vitamin Mask',category:'Masks',price:1350,size:'60 ml',skin:['Normal','Dry','Combination'],concerns:['Dullness','Dehydration'],ingredients:['Vitamin C','Glycerin'],badge:'',new:false,available:true,image:img(24),description:'A bright-feeling cream mask for a considered weekend ritual.',directions:'Apply for 8–10 minutes and rinse thoroughly.',precautions:'Use sunscreen daily and stop if irritation occurs.'}
   ];
   window.getProduct=(id)=>window.Products.find(p=>p.id===id);
-  window.productCard=(p)=>`<article class="product-card"><a class="product-media" href="product-details.html?id=${p.id}" aria-label="View ${p.name}"><img src="${p.image}" alt="${p.name}" loading="lazy">${p.badge?`<span class="badge">${p.badge}</span>`:''}</a><div class="product-info"><span class="product-kicker">${p.category}</span><h3><a href="product-details.html?id=${p.id}">${p.name}</a></h3><p class="product-desc">${p.description}</p><div class="product-meta"><span class="price">${StoreConfig.currency}${p.price.toLocaleString('en-IN')}</span><span class="size">${p.size}</span></div><div class="product-actions"><button class="btn btn-primary btn-sm add-to-cart" data-product="${p.id}" ${p.available?'':'disabled'}>${p.available?'Add to Bag':'Sold Out'}</button><a class="btn btn-outline btn-sm" href="product-details.html?id=${p.id}">Details</a></div></div></article>`;
+  window.productCard = p => `<article class="product-card">
+    <div class="product-media">
+      <a href="product-details.html?id=${p.id}" aria-label="View ${p.name}"><img class="product-image" src="${p.image}" alt="${p.name}" loading="lazy"></a>
+      ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+      <div class="media-actions"><button class="btn btn-sm add-to-cart" type="button" data-product="${p.id}" ${p.available ? '' : 'disabled'}>${p.available ? 'Quick add' : 'Sold out'}</button><a class="btn btn-sm" href="product-details.html?id=${p.id}" aria-label="View ${p.name} details">View</a></div>
+    </div>
+    <div class="product-info">
+      <div class="product-topline"><span class="product-kicker">${p.category}</span><span class="size">${p.size}</span></div>
+      <h3><a href="product-details.html?id=${p.id}">${p.name}</a></h3>
+      <p class="product-desc">${p.description}</p>
+      <div class="product-meta"><span class="price">${StoreConfig.currency}${p.price.toLocaleString('en-IN')}</span><span class="size">${p.available ? 'Available' : 'Unavailable'}</span></div>
+      <div class="touch-actions"><button class="btn btn-primary btn-sm add-to-cart" type="button" data-product="${p.id}" ${p.available ? '' : 'disabled'}>${p.available ? 'Add' : 'Sold out'}</button><a class="btn btn-outline btn-sm" href="product-details.html?id=${p.id}" aria-label="View ${p.name} details">View</a></div>
+    </div>
+  </article>`;
 })();

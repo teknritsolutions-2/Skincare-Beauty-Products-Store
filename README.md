@@ -1,6 +1,6 @@
 # Veloura Skin — static skincare storefront
 
-A framework-free HTML5/CSS3/JavaScript storefront with 18 public page templates, 24 centralized product records, combined catalog filters, deterministic skin quiz, bundle pricing, LocalStorage cart, checkout preview, consultation form validation, dark mode and RTL layout support.
+A framework-free HTML5/CSS3/JavaScript storefront with 17 public page templates, 24 centralized product records, combined catalog filters, reusable inline skin finder, bundle pricing, a LocalStorage mini-cart, checkout preview, consultation form validation, dark mode and RTL layout support.
 
 ## Run locally
 

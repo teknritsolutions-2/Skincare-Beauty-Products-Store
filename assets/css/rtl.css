@@ -1,1 +1,19 @@
-[dir="rtl"] .dropdown{inset-inline-start:auto;inset-inline-end:0}[dir="rtl"] .product-media img,[dir="rtl"] .hero-media img,[dir="rtl"] .media-frame img,[dir="rtl"] .gallery-main img,[dir="rtl"] .journal-media img{transform:none!important}[dir="rtl"] .product-actions,[dir="rtl"] .summary-row,[dir="rtl"] .detail-list li{direction:rtl}[dir="rtl"] .price,[dir="rtl"] .old-price{direction:ltr;unicode-bidi:isolate}[dir="rtl"] input[type=email],[dir="rtl"] input[type=tel]{direction:ltr;text-align:right}
+[dir="rtl"] .dropdown { inset-inline-start: auto; inset-inline-end: -10px; }
+[dir="rtl"] .mini-cart { transform: translateX(-104%); box-shadow: 20px 0 70px rgba(20, 31, 25, .14); }
+[dir="rtl"] .cart-open .mini-cart { transform: none; }
+[dir="rtl"] .mobile-panel { transform: translateX(-105%); }
+[dir="rtl"] .mobile-panel.open { transform: none; }
+[dir="rtl"] .filters { transform: translateX(105%); }
+[dir="rtl"] .filters.open { transform: none; }
+[dir="rtl"] .btn-text:not(button)::after { content: '←'; }
+[dir="rtl"] .btn-text:not(button):hover::after { transform: translateX(-4px); }
+[dir="rtl"] .product-image,
+[dir="rtl"] .commerce-hero-media img,
+[dir="rtl"] .editorial-hero img,
+[dir="rtl"] .routine-canvas img,
+[dir="rtl"] .gallery-main img,
+[dir="rtl"] .bundle-card img { transform: none !important; }
+[dir="rtl"] .price,
+[dir="rtl"] .old-price { direction: ltr; unicode-bidi: isolate; }
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="tel"] { direction: ltr; text-align: right; }

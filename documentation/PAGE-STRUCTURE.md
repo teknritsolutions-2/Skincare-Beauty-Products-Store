@@ -1,12 +1,11 @@
 # Page structure
 
-- `pages/index.html`: primary 11-section storefront
-- `pages/home2.html`: editorial Daily Skin Journal alternative
+- `pages/index.html`: primary product-first storefront with inline skin finder
+- `pages/home2.html`: distinct editorial Daily Skin Journal with inline skin finder
 - `pages/shop.html`: filterable 24-product catalog
 - `pages/product-details.html`: one query-driven product template
 - `pages/ingredients.html`: searchable ingredient education
 - `pages/skin-type-guide.html`: interactive type guide
-- `pages/skin-quiz.html`: six-question deterministic quiz
 - `pages/bundles.html`: six data-driven bundles
 - `pages/cart.html`, `checkout.html`: local bag and review-only checkout
 - `pages/contact.html`: consultation enquiry

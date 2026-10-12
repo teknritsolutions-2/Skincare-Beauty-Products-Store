@@ -1,10 +1,76 @@
-(function(){
- const grid=document.querySelector('#catalogGrid');if(!grid)return;
- const params=new URLSearchParams(location.search),state={category:params.get('category')||'All',skin:params.get('skin')||'All',ingredient:params.get('ingredient')||'All',available:false,price:2500,sort:'featured'};
- const form=document.querySelector('#filters'),count=document.querySelector('#resultCount'),sort=document.querySelector('#sortProducts');
- const sync=()=>{form.elements.category.value=state.category;form.elements.skin.value=state.skin;form.elements.ingredient.value=state.ingredient;form.elements.available.checked=state.available;form.elements.price.value=state.price;sort.value=state.sort};
- function render(){let list=Products.filter(p=>(state.category==='All'||p.category===state.category)&&(state.skin==='All'||p.skin.includes(state.skin)||p.skin.includes('All'))&&(state.ingredient==='All'||p.ingredients.includes(state.ingredient))&&(!state.available||p.available)&&p.price<=state.price);list.sort(state.sort==='price-low'?(a,b)=>a.price-b.price:state.sort==='price-high'?(a,b)=>b.price-a.price:state.sort==='name'?(a,b)=>a.name.localeCompare(b.name):state.sort==='newest'?(a,b)=>Number(b.new)-Number(a.new):()=>0);count.textContent=`${list.length} product${list.length===1?'':'s'}`;grid.innerHTML=list.length?list.map(productCard).join(''):`<div class="empty-state"><h2>No exact matches</h2><p>Try removing a filter or exploring all skincare.</p><button class="btn btn-primary" id="emptyReset">Clear filters</button></div>`;const u=new URL(location);['category','skin'].forEach(k=>state[k]!=='All'?u.searchParams.set(k,state[k]):u.searchParams.delete(k));history.replaceState({},'',u)}
- form.addEventListener('change',e=>{state[e.target.name]=e.target.type==='checkbox'?e.target.checked:e.target.type==='range'?Number(e.target.value):e.target.value;document.querySelector('#priceValue').textContent=`₹${Number(state.price).toLocaleString('en-IN')}`;render()});sort.addEventListener('change',()=>{state.sort=sort.value;render()});
- const reset=()=>{Object.assign(state,{category:'All',skin:'All',ingredient:'All',available:false,price:2500,sort:'featured'});sync();document.querySelector('#priceValue').textContent='₹2,500';render()};document.querySelector('#clearFilters').addEventListener('click',reset);grid.addEventListener('click',e=>{if(e.target.id==='emptyReset')reset()});
- const drawer=document.querySelector('.filters'),ft=document.querySelector('.filter-toggle');ft.addEventListener('click',()=>{drawer.classList.add('open');document.body.classList.add('filter-open')});document.querySelector('#closeFilters').addEventListener('click',()=>{drawer.classList.remove('open');document.body.classList.remove('filter-open')});sync();render();
+(function () {
+  const grid = document.querySelector('#catalogGrid');
+  if (!grid) return;
+
+  const params = new URLSearchParams(location.search);
+  const state = {
+    category: params.get('category') || 'All', skin: params.get('skin') || 'All',
+    ingredient: params.get('ingredient') || 'All', available: params.get('available') === 'true',
+    price: Number(params.get('price')) || 2500, sort: params.get('sort') || 'featured'
+  };
+  const form = document.querySelector('#filters');
+  const count = document.querySelector('#resultCount');
+  const sort = document.querySelector('#sortProducts');
+  const drawer = document.querySelector('#filterDrawer');
+  const toggle = document.querySelector('.filter-toggle');
+
+  function syncControls() {
+    form.elements.category.value = state.category;
+    form.elements.skin.value = state.skin;
+    form.elements.ingredient.value = state.ingredient;
+    form.elements.available.checked = state.available;
+    form.elements.price.value = state.price;
+    sort.value = state.sort;
+    document.querySelector('#priceValue').textContent = `₹${state.price.toLocaleString('en-IN')}`;
+    document.querySelectorAll('[data-category-pill]').forEach(button => button.classList.toggle('active', button.dataset.categoryPill === state.category));
+  }
+
+  function updateUrl() {
+    const url = new URL(location);
+    ['category', 'skin', 'ingredient', 'sort'].forEach(key => state[key] === 'All' || state[key] === 'featured' ? url.searchParams.delete(key) : url.searchParams.set(key, state[key]));
+    state.available ? url.searchParams.set('available', 'true') : url.searchParams.delete('available');
+    state.price < 2500 ? url.searchParams.set('price', String(state.price)) : url.searchParams.delete('price');
+    history.replaceState({}, '', url);
+  }
+
+  function render() {
+    const list = Products.filter(product =>
+      (state.category === 'All' || product.category === state.category) &&
+      (state.skin === 'All' || product.skin.includes(state.skin) || product.skin.includes('All')) &&
+      (state.ingredient === 'All' || product.ingredients.includes(state.ingredient)) &&
+      (!state.available || product.available) && product.price <= state.price
+    );
+    const sorts = {
+      'price-low': (a, b) => a.price - b.price, 'price-high': (a, b) => b.price - a.price,
+      name: (a, b) => a.name.localeCompare(b.name), newest: (a, b) => Number(b.new) - Number(a.new)
+    };
+    if (sorts[state.sort]) list.sort(sorts[state.sort]);
+    count.textContent = `${list.length} product${list.length === 1 ? '' : 's'}`;
+    grid.innerHTML = list.length ? list.map(productCard).join('') : '<div class="empty-state"><h2>No exact matches</h2><p>Try widening a filter or returning to the full shelf.</p><button class="btn btn-primary" id="emptyReset" type="button">Clear filters</button></div>';
+    syncControls(); updateUrl();
+  }
+
+  function reset() {
+    Object.assign(state, { category: 'All', skin: 'All', ingredient: 'All', available: false, price: 2500, sort: 'featured' });
+    render();
+  }
+  function closeFilters() {
+    drawer.classList.remove('open'); document.body.classList.remove('filter-open');
+    drawer.setAttribute('aria-hidden', String(matchMedia('(max-width: 1023px)').matches)); toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  form.addEventListener('input', event => {
+    const target = event.target;
+    if (!target.name) return;
+    state[target.name] = target.type === 'checkbox' ? target.checked : target.type === 'range' ? Number(target.value) : target.value;
+    render();
+  });
+  sort.addEventListener('change', () => { state.sort = sort.value; render(); });
+  document.querySelectorAll('[data-category-pill]').forEach(button => button.addEventListener('click', () => { state.category = button.dataset.categoryPill; render(); }));
+  ['#clearFilters', '#desktopClearFilters'].forEach(selector => document.querySelector(selector).addEventListener('click', reset));
+  document.querySelector('#applyFilters').addEventListener('click', closeFilters);
+  grid.addEventListener('click', event => { if (event.target.id === 'emptyReset') reset(); });
+  toggle.addEventListener('click', () => { drawer.classList.add('open'); document.body.classList.add('filter-open'); drawer.setAttribute('aria-hidden', 'false'); toggle.setAttribute('aria-expanded', 'true'); document.querySelector('#closeFilters').focus(); });
+  document.querySelector('#closeFilters').addEventListener('click', closeFilters);
+  syncControls(); render();
 })();
