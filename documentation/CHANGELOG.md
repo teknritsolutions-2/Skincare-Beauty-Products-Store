@@ -19,3 +19,13 @@
 - Added product search, richer collection content and grouped FAQ topics
 - Raised small type sizes, improved contrast and standardized image proportions
 - Removed unsuitable and unused photography after a full local asset audit
+
+## 1.2.0 — 2026-10-12
+
+- Replaced all 24 catalog mains with unique, locally hosted, source-documented skincare editorial photographs
+- Added product-specific gallery data, accurate alternative text and accessible gallery controls for future multi-image sets
+- Added a synchronous, storage-safe theme initializer to every page
+- Made the mobile drawer inert when closed, focus-trapped when open and resilient across every close path and breakpoint change
+- Converted the Arenne wordmark to device-independent SVG paths and replaced header utility symbols with inline SVG icons
+- Corrected footer discovery links, mobile hero heights and remaining undersized interface text
+- Extended automated QA for image uniqueness, gallery integrity, navigation, footer, brand assets and theme initialization
