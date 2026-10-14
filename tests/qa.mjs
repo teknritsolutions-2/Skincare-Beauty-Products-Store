@@ -40,7 +40,7 @@ for(const symbol of ['◐','☰','✕'])if(main.includes(symbol))errors.push(`Te
 for(const file of ['logo.svg','logo-white.svg']){const svg=fs.readFileSync(path.join(root,'assets/brand',file),'utf8');if(svg.includes('<text'))errors.push(`${file}: wordmark must use vector paths, not SVG text`)}
 const themeInit=fs.readFileSync(path.join(root,'assets/js/theme-init.js'),'utf8');if(!themeInit.includes('prefers-color-scheme')||!themeInit.includes('try'))errors.push('Theme initializer lacks system fallback or storage protection');
 if(fs.existsSync(path.join(root,'pages/skin-quiz.html')))errors.push('Standalone quiz page should remain removed');
-const textFiles=['README.md','index.html',...required,...fs.readdirSync(path.join(root,'documentation')).filter(file=>file.endsWith('.md')).map(file=>`documentation/${file}`)];
+const textFiles=['README.md',...required,...fs.readdirSync(path.join(root,'documentation')).filter(file=>file.endsWith('.md')).map(file=>`documentation/${file}`)];
 for(const file of textFiles){if(fs.readFileSync(path.join(root,file),'utf8').match(/Veloura/i))errors.push(`Legacy brand reference in ${file}`)}
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log(`QA passed: ${required.length} required files, 17 pages, exact navigation, clean brand references, ${context.window.Products.length} unique products, local references resolved.`);

@@ -3,14 +3,14 @@
   if (bestsellers) bestsellers.innerHTML = Products.filter(product => product.badge === 'Bestseller').slice(0, 6).map(productCard).join('');
 
   const journalProducts = document.querySelector('#journalProducts');
-  if (journalProducts) journalProducts.innerHTML = ['oat-veil-cleanser', 'clear-path-serum', 'squalane-cream', 'fluid-shield'].map(getProduct).map(productCard).join('');
+  if (journalProducts) journalProducts.innerHTML = ['oat-veil-cleanser', 'clear-path-serum', 'squalane-cream', 'fluid-shield', 'dew-gel-cleanser', 'comfort-spf'].map(getProduct).map(productCard).join('');
 
   const skinGrid = document.querySelector('#skinCollection');
   const skinLink = document.querySelector('#skinCollectionLink');
   const tabs = document.querySelectorAll('[data-skin-tab]');
   function renderSkin(type) {
     if (!skinGrid) return;
-    const items = Products.filter(product => product.available && (product.skin.includes(type) || product.skin.includes('All'))).slice(0, 4);
+    const items = Products.filter(product => product.available && (product.skin.includes(type) || product.skin.includes('All'))).slice(0, 6);
     skinGrid.innerHTML = items.map(productCard).join('');
     if (skinLink) { skinLink.href = `shop.html?skin=${encodeURIComponent(type)}`; skinLink.textContent = `Shop all ${type.toLowerCase()}-skin products`; }
     tabs.forEach(tab => { const active = tab.dataset.skinTab === type; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
@@ -40,7 +40,7 @@
   }
 
   const routineData = {
-    morning: { image: '../assets/images/home/hero.jpg', alt: 'Morning routine products', eyebrow: '07:30 · Morning', title: 'Start light. Finish protected.', copy: 'Hydrate in comfortable layers, then give sunscreen the final word.', ids: ['dew-gel-cleanser', 'waterline-serum', 'water-gel', 'fluid-shield'], labels: ['Cleanse', 'Hydrate', 'Moisturize', 'Protect'] },
+    morning: { image: '../assets/images/bundles/bundle-everyday.jpg', alt: 'Morning routine products', eyebrow: '07:30 · Morning', title: 'Start light. Finish protected.', copy: 'Hydrate in comfortable layers, then give sunscreen the final word.', ids: ['dew-gel-cleanser', 'waterline-serum', 'water-gel', 'fluid-shield'], labels: ['Cleanse', 'Hydrate', 'Moisturize', 'Protect'] },
     evening: { image: '../assets/images/home/evening.jpg', alt: 'Evening skincare routine', eyebrow: '21:15 · Evening', title: 'Let the day come off gently.', copy: 'Cleanse thoroughly, choose one purposeful treatment, then settle in with moisture.', ids: ['cleansing-balm', 'cloudmilk-cleanser', 'clear-path-serum', 'ceramide-cloud'], labels: ['First cleanse', 'Second cleanse', 'Treat', 'Moisturize'] }
   };
   const routineButtons = document.querySelectorAll('[data-routine-time]');

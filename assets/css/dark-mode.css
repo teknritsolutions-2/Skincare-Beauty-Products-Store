@@ -1,44 +1,693 @@
+/* ==========================================================================
+   Arenne Skin — Dark Theme (Obsidian Black & Fluid Pastel Green Accents)
+   ========================================================================== */
+
 [data-theme="dark"] {
-  --paper: #121714;
-  --surface: #1c231f;
-  --wash: #252d28;
-  --ink: #f1f4f2;
-  --muted: #b5c0b9;
-  --line: #36413a;
-  --sage-900: #9dc5ac;
-  --sage-800: #91b9a0;
-  --sage-700: #7aa28a;
-  --sage-500: #71927e;
-  --sage-300: #c3d8ca;
-  --sage-100: #2a3a31;
-  --sage-50: #202a24;
-  --shadow-soft: 0 18px 55px rgba(0, 0, 0, .3);
-  --shadow-card: 0 24px 70px rgba(0, 0, 0, .42);
+  --paper: #080b09;        /* True obsidian black ground */
+  --surface: #0f1511;      /* Elevated obsidian charcoal */
+  --wash: #131a15;         /* Soft dark slate */
+  --ink: #f4f7f5;          /* Crisp high-contrast off-white */
+  --muted: #a1b0a7;        /* Refined silver-sage */
+  --line: #222d26;         /* Structural borders */
+  --sage-900: #a9cbb7;     /* Luminous pastel mint accent */
+  --sage-800: #9cbfa9;
+  --sage-700: #86ad95;
+  --sage-500: #719581;
+  --sage-300: #c2ded0;
+  --sage-100: #1a251e;
+  --sage-50: #101913;
+  --danger: #d96f64;
+  --shadow-soft: 0 18px 50px rgba(0, 0, 0, .55);
+  --shadow-card: 0 24px 70px rgba(0, 0, 0, .7);
 }
-[data-theme="dark"] .site-header { background: rgba(18, 23, 20, .92); }
-[data-theme="dark"] .btn-primary { background: #a9cbb7; color: #172119; }
-[data-theme="dark"] .btn-primary:hover { background: #c2dccd; }
-[data-theme="dark"] .btn-outline { border-color: #a8b8ae; color: #f1f4f2; }
-[data-theme="dark"] .btn-outline:hover { background: #f1f4f2; color: #171d19; }
-[data-theme="dark"] .quiz-commerce,
-[data-theme="dark"] .quiz-panel,
-[data-theme="dark"] .quote-band,
-[data-theme="dark"] .bundle-editorial-hero,
-[data-theme="dark"] .guide-copy { background: #23362c; }
-[data-theme="dark"] .site-footer { background: #0b0f0d; }
-[data-theme="dark"] .product-image,
-[data-theme="dark"] .commerce-hero-media > img,
-[data-theme="dark"] .editorial-hero > img { filter: brightness(.88); }
-[data-theme="dark"] .badge,
-[data-theme="dark"] .media-actions .btn { background: #eef2ef; color: #1b241f; }
-[data-theme="dark"] .notice { color: #cfe1d5; }
+
+/* Base Canvas & Body */
+[data-theme="dark"] body {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+/* Header & Navigation */
+[data-theme="dark"] .site-header {
+  background: rgba(8, 11, 9, 0.94);
+  border-block-end: 1px solid rgba(169, 203, 183, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-theme="dark"] .desktop-nav .nav-link,
+[data-theme="dark"] .nav-trigger {
+  color: #dce7e1;
+}
+
+[data-theme="dark"] .desktop-nav .nav-link:hover,
+[data-theme="dark"] .nav-trigger:hover,
+[data-theme="dark"] .desktop-nav .nav-link.active {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .dropdown {
+  background: #0f1511;
+  border: 1px solid rgba(169, 203, 183, 0.16);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="dark"] .dropdown a {
+  color: #dce7e1;
+}
+
+[data-theme="dark"] .dropdown a:hover {
+  background: rgba(169, 203, 183, 0.1);
+  color: #a9cbb7;
+}
+
+/* ==========================================================================
+   Section Rhythm & Elimination of Double-Padding Void
+   ========================================================================== */
+
+/* Base Section: Sits on obsidian black canvas */
+[data-theme="dark"] .section {
+  background-color: transparent;
+}
+
+/* Elevated Surface Section: Deep charcoal slate with subtle luminous hairlines */
+[data-theme="dark"] .section.surface {
+  background: #0f1511;
+  border-block: 1px solid rgba(169, 203, 183, 0.08);
+}
+
+/* Soft Contrast Section: Refined dark slate */
+[data-theme="dark"] .section.soft {
+  background: #131a15;
+  border-block: 1px solid rgba(169, 203, 183, 0.07);
+}
+
+/* Fluid Pastel Green Ambient Section */
+[data-theme="dark"] .section.tint {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(169, 203, 183, 0.14) 0%, rgba(145, 185, 160, 0.03) 65%, transparent 100%),
+    radial-gradient(ellipse 70% 50% at 80% 100%, rgba(169, 203, 183, 0.08) 0%, transparent 70%),
+    linear-gradient(180deg, #0e1712 0%, #09100c 100%);
+  border-block: 1px solid rgba(169, 203, 183, 0.16);
+  box-shadow: inset 0 1px 0 rgba(169, 203, 183, 0.12), inset 0 -1px 0 rgba(169, 203, 183, 0.08);
+}
+
+/* ==========================================================================
+   Featured Hero & Highlight Bands with Fluid Pastel Green
+   ========================================================================== */
+
+[data-theme="dark"] .quote-band {
+  background:
+    radial-gradient(circle at 85% 20%, rgba(169, 203, 183, 0.22) 0%, transparent 55%),
+    radial-gradient(circle at 15% 85%, rgba(145, 185, 160, 0.12) 0%, transparent 50%),
+    linear-gradient(135deg, #0d1611 0%, #16241a 100%);
+  border: 1px solid rgba(169, 203, 183, 0.25);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55), 0 0 32px rgba(169, 203, 183, 0.06);
+  color: #ffffff;
+}
+
+/* Open Consultation Band: Transparent editorial divider across containers */
+[data-theme="dark"] .consultation-band {
+  background: transparent;
+  border-block: 1px solid rgba(169, 203, 183, 0.14);
+  box-shadow: none;
+  padding-block: clamp(36px, 5vw, 66px);
+}
+
+[data-theme="dark"] .consultation-band h1,
+[data-theme="dark"] .consultation-band h2,
+[data-theme="dark"] .consultation-band h3 {
+  color: #f4f7f5;
+}
+
+[data-theme="dark"] .consultation-band .eyebrow {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .consultation-band p {
+  color: #a1b0a7;
+}
+
+[data-theme="dark"] .consultation-band .btn-outline {
+  border-color: rgba(169, 203, 183, 0.38);
+  color: #f4f7f5;
+  background: transparent;
+}
+
+[data-theme="dark"] .consultation-band .btn-outline:hover {
+  background: rgba(169, 203, 183, 0.12);
+  border-color: #a9cbb7;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .bundle-editorial-hero {
+  background:
+    radial-gradient(ellipse at 80% 25%, rgba(169, 203, 183, 0.18) 0%, transparent 60%),
+    linear-gradient(135deg, #0c140f 0%, #152219 100%);
+  border: 1px solid rgba(169, 203, 183, 0.22);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .quiz-commerce {
+  background: #0f1612;
+  border: 1px solid rgba(169, 203, 183, 0.18);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .quiz-panel {
+  background:
+    radial-gradient(ellipse at 90% 15%, rgba(169, 203, 183, 0.15) 0%, transparent 65%),
+    #0d1410;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .guide-copy {
+  background:
+    radial-gradient(ellipse at 85% 20%, rgba(169, 203, 183, 0.16) 0%, transparent 60%),
+    #0e1611;
+  color: #ffffff;
+}
+
+/* Headings in Highlight Bands */
+[data-theme="dark"] .quiz-panel h1, [data-theme="dark"] .quiz-panel h2, [data-theme="dark"] .quiz-panel h3,
+[data-theme="dark"] .quote-band h1, [data-theme="dark"] .quote-band h2, [data-theme="dark"] .quote-band h3,
+[data-theme="dark"] .bundle-editorial-copy h1, [data-theme="dark"] .bundle-editorial-copy h2, [data-theme="dark"] .bundle-editorial-copy h3,
+[data-theme="dark"] .guide-copy h1, [data-theme="dark"] .guide-copy h2, [data-theme="dark"] .guide-copy h3 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .quiz-panel .eyebrow,
+[data-theme="dark"] .quote-band .eyebrow,
+[data-theme="dark"] .bundle-editorial-copy .eyebrow,
+[data-theme="dark"] .guide-copy .eyebrow {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .quiz-panel p,
+[data-theme="dark"] .quote-band p,
+[data-theme="dark"] .bundle-editorial-copy p,
+[data-theme="dark"] .guide-copy p,
+[data-theme="dark"] .guide-copy li {
+  color: #dce7e1;
+}
+
+/* Buttons inside Highlight Bands */
+[data-theme="dark"] .quote-band .btn-secondary,
+[data-theme="dark"] .guide-copy .btn-secondary,
+[data-theme="dark"] .quiz-panel .btn-secondary {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="dark"] .quote-band .btn-secondary:hover,
+[data-theme="dark"] .guide-copy .btn-secondary:hover,
+[data-theme="dark"] .quiz-panel .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .quote-band .btn-light,
+[data-theme="dark"] .consultation-band .btn-light,
+[data-theme="dark"] .bundle-editorial-copy .btn-light {
+  background: #ffffff !important;
+  color: #080d0a !important;
+}
+
+[data-theme="dark"] .quote-band .btn-light:hover,
+[data-theme="dark"] .consultation-band .btn-light:hover,
+[data-theme="dark"] .bundle-editorial-copy .btn-light:hover {
+  background: #e6eee9 !important;
+  color: #080d0a !important;
+}
+
+[data-theme="dark"] .quote-band .btn-outline,
+[data-theme="dark"] .consultation-band .btn-outline {
+  border-color: rgba(255, 255, 255, 0.65) !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .quote-band .btn-outline:hover,
+[data-theme="dark"] .consultation-band .btn-outline:hover {
+  background: #ffffff !important;
+  color: #080d0a !important;
+}
+
+/* ==========================================================================
+   Buttons & Actions
+   ========================================================================== */
+
+[data-theme="dark"] .btn-primary {
+  background: #a9cbb7;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: #c3e2d0;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: #18231c;
+  color: #e1ede5;
+  border: 1px solid rgba(169, 203, 183, 0.22);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: #233227;
+  color: #ffffff;
+  border-color: rgba(169, 203, 183, 0.35);
+}
+
+[data-theme="dark"] .btn-outline {
+  border-color: rgba(169, 203, 183, 0.38);
+  color: #f4f7f5;
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background: rgba(169, 203, 183, 0.12);
+  border-color: #a9cbb7;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .btn-light {
+  background: #f0f4f1;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .btn-light:hover {
+  background: #ffffff;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .btn-text {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .btn-text:hover {
+  color: #c3e2d0;
+}
+
+/* ==========================================================================
+   Cards, Tiles & Media Containers
+   ========================================================================== */
+
+[data-theme="dark"] .info-card {
+  background: #111813;
+  border: 1px solid rgba(169, 203, 183, 0.14);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .info-card:hover {
+  border-color: rgba(169, 203, 183, 0.35);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 18px rgba(169, 203, 183, 0.06);
+}
+
+[data-theme="dark"] .info-card h2,
+[data-theme="dark"] .info-card h3 {
+  color: #f4f7f5;
+}
+
+[data-theme="dark"] .info-card p,
+[data-theme="dark"] .info-card li {
+  color: #a1b0a7;
+}
+
+[data-theme="dark"] .product-media {
+  background: #111713;
+  border: 1px solid rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .product-card:hover .product-media {
+  border-color: rgba(169, 203, 183, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(169, 203, 183, 0.08);
+}
+
+[data-theme="dark"] .product-card h3 {
+  color: #f4f7f5;
+}
+
+[data-theme="dark"] .product-card .price {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .product-card p {
+  color: #a1b0a7;
+}
+
+[data-theme="dark"] .bundle-card,
+[data-theme="dark"] .editorial-bundles article {
+  background: #111713;
+  border: 1px solid rgba(169, 203, 183, 0.14);
+}
+
+[data-theme="dark"] .ingredient-hero {
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(169, 203, 183, 0.16) 0%, transparent 60%),
+    #101612;
+  border: 1px solid rgba(169, 203, 183, 0.2);
+}
+
+[data-theme="dark"] .ingredient-product-card,
+[data-theme="dark"] .guide-card,
+[data-theme="dark"] .summary-card {
+  background: #111713;
+  border: 1px solid rgba(169, 203, 183, 0.14);
+}
+
+[data-theme="dark"] .ingredient-product-media {
+  background: #141c16;
+  border-block-end: 1px solid rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .ingredient-product-body h4 a,
+[data-theme="dark"] .ingredient-product-body strong {
+  color: #f4f7f5;
+}
+
+[data-theme="dark"] .ingredient-product-body .price,
+[data-theme="dark"] .guide-card-body .price {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .meta-card {
+  background: #111813;
+  border: 1px solid rgba(169, 203, 183, 0.12);
+}
+
+[data-theme="dark"] .meta-card p {
+  color: #dce7e1;
+}
+
+[data-theme="dark"] .ingredient-visual-wrap {
+  background: #151d17;
+  border: 1px solid rgba(169, 203, 183, 0.14);
+}
+
+[data-theme="dark"] .related-products {
+  border-block-start: 1px solid rgba(169, 203, 183, 0.12);
+}
+
+[data-theme="dark"] .ingredient-link {
+  background: #111713;
+  border: 1px solid rgba(169, 203, 183, 0.14);
+}
+
+[data-theme="dark"] .ingredient-link:hover {
+  background: #162019;
+  border-color: rgba(169, 203, 183, 0.35);
+}
+
+[data-theme="dark"] .ingredient-link h3 { color: #f4f7f5; }
+[data-theme="dark"] .ingredient-link p { color: #a1b0a7; }
+[data-theme="dark"] .ingredient-link span { color: #a9cbb7; }
+
+[data-theme="dark"] .ingredient-mini {
+  background: #111713;
+  border: 1px solid rgba(169, 203, 183, 0.14);
+}
+
+[data-theme="dark"] .ingredient-mini strong { color: #f4f7f5; }
+[data-theme="dark"] .ingredient-mini small { color: #a1b0a7; }
+
+[data-theme="dark"] .empty-state {
+  background: #0f1511;
+  border: 1px solid rgba(169, 203, 183, 0.14);
+}
+
+/* ==========================================================================
+   Interactive Pills, Chips, Tabs, Controls
+   ========================================================================== */
+
+[data-theme="dark"] .category-pill,
+[data-theme="dark"] .guide-tab,
+[data-theme="dark"] .skin-tab,
+[data-theme="dark"] .filter-chip,
+[data-theme="dark"] .skin-story {
+  background: #101612;
+  border: 1px solid rgba(169, 203, 183, 0.16);
+  color: #dce7e1;
+}
+
 [data-theme="dark"] .category-pill:hover,
-[data-theme="dark"] .category-pill.active,
 [data-theme="dark"] .guide-tab:hover,
+[data-theme="dark"] .skin-tab:hover,
+[data-theme="dark"] .filter-chip:hover {
+  background: #18221b;
+  border-color: rgba(169, 203, 183, 0.4);
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .category-pill.active,
 [data-theme="dark"] .guide-tab.active,
-[data-theme="dark"] .routine-switch button:hover,
+[data-theme="dark"] .skin-tab.active,
+[data-theme="dark"] .filter-chip.active,
 [data-theme="dark"] .routine-switch button.active,
 [data-theme="dark"] .skin-story:hover,
-[data-theme="dark"] .skin-story.active { background: #a9cbb7; border-color: #a9cbb7; color: #172119; }
+[data-theme="dark"] .skin-story.active {
+  background: #a9cbb7;
+  border-color: #a9cbb7;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .skin-story:hover strong,
+[data-theme="dark"] .skin-story.active strong { color: #080d0a; }
 [data-theme="dark"] .skin-story:hover span,
-[data-theme="dark"] .skin-story.active span { color: #283b31; }
+[data-theme="dark"] .skin-story.active span { color: #1c2b22; }
+
+[data-theme="dark"] .routine-switch {
+  background: #101612;
+  border: 1px solid rgba(169, 203, 183, 0.16);
+}
+
+[data-theme="dark"] .routine-switch button {
+  color: #a1b0a7;
+}
+
+[data-theme="dark"] .routine-switch button:hover {
+  background: #18231c;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .detail-chip {
+  background: #131b15;
+  border: 1px solid rgba(169, 203, 183, 0.18);
+  color: #e1ede5;
+}
+
+[data-theme="dark"] .detail-chip:hover {
+  background: #1a251e;
+  border-color: #a9cbb7;
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .quiz-answer {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(169, 203, 183, 0.25);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .quiz-answer:hover,
+[data-theme="dark"] .quiz-answer.selected {
+  background: #a9cbb7;
+  border-color: #a9cbb7;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .quiz-result-product {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .quiz-result-product strong {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Forms, Inputs, Stats, Badges, Back-to-Top
+   ========================================================================== */
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .select,
+[data-theme="dark"] .search-input {
+  background: #0f1511;
+  color: #f4f7f5;
+  border: 1px solid rgba(169, 203, 183, 0.2);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .select:focus,
+[data-theme="dark"] .search-input:focus {
+  border-color: #a9cbb7;
+  outline-color: #a9cbb7;
+  background: #131a15;
+}
+
+[data-theme="dark"] .form-control::placeholder,
+[data-theme="dark"] .search-input::placeholder {
+  color: #728178;
+}
+
+[data-theme="dark"] .stat {
+  background: #101612;
+  border-inline-start: 3px solid #a9cbb7;
+  border-block: 1px solid rgba(169, 203, 183, 0.1);
+  border-inline-end: 1px solid rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .stat strong { color: #f4f7f5; }
+[data-theme="dark"] .stat span { color: #a1b0a7; }
+
+[data-theme="dark"] .eyebrow { color: #a9cbb7; }
+[data-theme="dark"] .section-index { color: #a9cbb7; }
+[data-theme="dark"] .routine-number { color: #a9cbb7; }
+
+[data-theme="dark"] .routine-product-tag {
+  background: rgba(15, 21, 17, 0.94);
+  color: #f4f7f5;
+  border: 1px solid rgba(169, 203, 183, 0.2);
+}
+
+[data-theme="dark"] .routine-step {
+  border-bottom: 1px solid rgba(169, 203, 183, 0.12);
+}
+
+[data-theme="dark"] .badge,
+[data-theme="dark"] .media-actions .btn {
+  background: #f0f4f1;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .notice {
+  background: #111a14;
+  border-inline-start-color: #a9cbb7;
+  color: #dce7e1;
+}
+
+[data-theme="dark"] .form-status {
+  background: #111a14;
+  color: #dce7e1;
+  border: 1px solid rgba(169, 203, 183, 0.2);
+}
+
+[data-theme="dark"] .back-top {
+  background: #a9cbb7;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .back-top:hover {
+  background: #c3e2d0;
+  color: #080d0a;
+}
+
+[data-theme="dark"] .back-top svg path {
+  stroke: #080d0a !important;
+  fill: none !important;
+}
+
+/* Footer & Image Tuning */
+[data-theme="dark"] .site-footer {
+  background: #050705;
+  border-top: 1px solid rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .product-image,
+[data-theme="dark"] .commerce-hero-media > img,
+[data-theme="dark"] .editorial-hero > img {
+  filter: brightness(0.92);
+}
+
+[data-theme="dark"] .mini-cart {
+  background: #0d120f;
+  border-inline-start: 1px solid rgba(169, 203, 183, 0.14);
+}
+
+[data-theme="dark"] .mini-cart-head,
+[data-theme="dark"] .mini-cart-foot {
+  border-color: rgba(169, 203, 183, 0.12);
+}
+
+[data-theme="dark"] .mini-cart-item,
+[data-theme="dark"] .cart-item {
+  border-color: rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .mini-cart-item img,
+[data-theme="dark"] .cart-item img {
+  background: #121814;
+}
+
+[data-theme="dark"] .mini-qty {
+  border-color: rgba(169, 203, 183, 0.2);
+}
+
+[data-theme="dark"] .bag-count {
+  background: var(--sage-900);
+  color: #080b09;
+  font-weight: 800;
+}
+
+/* Mobile Navigation Drawer Dark Mode */
+[data-theme="dark"] .mobile-panel {
+  background: #090e0b;
+  border-inline-start: 1px solid rgba(169, 203, 183, 0.14);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="dark"] .mobile-brand {
+  border-color: rgba(169, 203, 183, 0.12);
+}
+
+[data-theme="dark"] .mobile-links a,
+[data-theme="dark"] .mobile-section-toggle {
+  color: #e5ece8;
+  border-color: rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .mobile-links a:hover,
+[data-theme="dark"] .mobile-section-toggle:hover {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .mobile-section-toggle.active,
+[data-theme="dark"] .mobile-links a.active {
+  color: #a9cbb7;
+}
+
+[data-theme="dark"] .mobile-sub {
+  border-color: rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .mobile-sub a {
+  background: #111813;
+  border-color: rgba(169, 203, 183, 0.18);
+  color: #cdd9d2;
+}
+
+[data-theme="dark"] .mobile-sub a:hover {
+  border-color: #a9cbb7;
+  color: #ffffff;
+  background: #16221a;
+}
+
+[data-theme="dark"] .mobile-controls {
+  border-color: rgba(169, 203, 183, 0.12);
+}
+
+[data-theme="dark"] .mobile-controls .icon-btn {
+  background: #111813;
+  border: 1px solid rgba(169, 203, 183, 0.22);
+  color: #dce7e1;
+}
+
+[data-theme="dark"] .mobile-controls .icon-btn:hover {
+  background: #18221b;
+  border-color: #a9cbb7;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .mobile-controls .theme-toggle svg {
+  fill: currentColor;
+}
