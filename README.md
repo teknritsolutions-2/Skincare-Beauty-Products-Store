@@ -2,6 +2,8 @@
 
 A framework-free HTML5/CSS3/JavaScript storefront with 17 public page templates, 24 centralized product records, combined catalog filters, reusable inline skin finder, bundle pricing, a LocalStorage mini-cart, checkout preview, consultation form validation, dark mode and RTL layout support.
 
+🌐 **Live Website**: [https://teknritsolutions-2.github.io/Skincare-Beauty-Products-Store/](https://teknritsolutions-2.github.io/Skincare-Beauty-Products-Store/)
+
 ## Run locally
 
 From this directory:
