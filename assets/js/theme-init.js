@@ -3,7 +3,8 @@
   let theme = 'light';
   let direction = 'ltr';
   try {
-    const savedTheme = localStorage.getItem('arenne-theme');
+    const urlTheme = new URLSearchParams(window.location.search).get('theme');
+    const savedTheme = (urlTheme === 'dark' || urlTheme === 'light') ? urlTheme : localStorage.getItem('arenne-theme');
     const savedDirection = localStorage.getItem('arenne-dir');
     theme = savedTheme === 'dark' || savedTheme === 'light'
       ? savedTheme

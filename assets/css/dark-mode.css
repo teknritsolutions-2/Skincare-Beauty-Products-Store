@@ -61,6 +61,23 @@
   color: #a9cbb7;
 }
 
+[data-theme="dark"] .nav-actions .icon-btn {
+  background: rgba(15, 21, 17, 0.85);
+  border-color: rgba(169, 203, 183, 0.2);
+  color: #f4f7f5;
+}
+
+[data-theme="dark"] .nav-actions .icon-btn:hover {
+  background: rgba(169, 203, 183, 0.16);
+  border-color: #a9cbb7;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .nav-actions .bag-count {
+  background: #a9cbb7;
+  color: #080d0a;
+}
+
 /* ==========================================================================
    Section Rhythm & Elimination of Double-Padding Void
    ========================================================================== */
@@ -211,14 +228,16 @@
 [data-theme="dark"] .quote-band .btn-light,
 [data-theme="dark"] .consultation-band .btn-light,
 [data-theme="dark"] .bundle-editorial-copy .btn-light {
-  background: #ffffff !important;
+  background: #a9cbb7 !important;
+  border-color: #a9cbb7 !important;
   color: #080d0a !important;
 }
 
 [data-theme="dark"] .quote-band .btn-light:hover,
 [data-theme="dark"] .consultation-band .btn-light:hover,
 [data-theme="dark"] .bundle-editorial-copy .btn-light:hover {
-  background: #e6eee9 !important;
+  background: #c3dfce !important;
+  border-color: #c3dfce !important;
   color: #080d0a !important;
 }
 
@@ -272,13 +291,36 @@
   color: #ffffff;
 }
 
-[data-theme="dark"] .btn-light {
-  background: #f0f4f1;
+[data-theme="dark"] .commerce-hero .btn-outline,
+[data-theme="dark"] .editorial-hero .btn-outline,
+[data-theme="dark"] .bundle-editorial-hero .btn-outline {
+  border-color: rgba(169, 203, 183, 0.45) !important;
+  color: #f4f7f5 !important;
+  background: rgba(169, 203, 183, 0.08) !important;
+}
+
+[data-theme="dark"] .commerce-hero .btn-outline:hover,
+[data-theme="dark"] .editorial-hero .btn-outline:hover,
+[data-theme="dark"] .bundle-editorial-hero .btn-outline:hover {
+  background: #a9cbb7 !important;
+  border-color: #a9cbb7 !important;
+  color: #080d0a !important;
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-light,
+[data-theme="dark"] .editorial-hero .btn-light,
+[data-theme="dark"] .bundle-editorial-hero .btn-light {
+  background: #a9cbb7;
+  border-color: #a9cbb7;
   color: #080d0a;
 }
 
-[data-theme="dark"] .btn-light:hover {
-  background: #ffffff;
+[data-theme="dark"] .btn-light:hover,
+[data-theme="dark"] .editorial-hero .btn-light:hover,
+[data-theme="dark"] .bundle-editorial-hero .btn-light:hover {
+  background: #c3dfce;
+  border-color: #c3dfce;
   color: #080d0a;
 }
 
@@ -390,14 +432,20 @@
   border-block-start: 1px solid rgba(169, 203, 183, 0.12);
 }
 
+[data-theme="dark"] .ingredient-strip {
+  background: #0f1511;
+  border-block: 1px solid rgba(169, 203, 183, 0.14);
+}
+
 [data-theme="dark"] .ingredient-link {
-  background: #111713;
-  border: 1px solid rgba(169, 203, 183, 0.14);
+  background: transparent;
+  border: 0;
+  border-inline-start: 1px solid rgba(169, 203, 183, 0.14);
 }
 
 [data-theme="dark"] .ingredient-link:hover {
-  background: #162019;
-  border-color: rgba(169, 203, 183, 0.35);
+  background: rgba(169, 203, 183, 0.06);
+  border-color: rgba(169, 203, 183, 0.3);
 }
 
 [data-theme="dark"] .ingredient-link h3 { color: #f4f7f5; }
@@ -485,15 +533,20 @@
 
 [data-theme="dark"] .quiz-answer {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(169, 203, 183, 0.25);
-  color: #ffffff;
+  border-color: rgba(169, 203, 183, 0.28);
+  color: #f4f7f5;
+  border-radius: var(--radius-btn);
 }
 
 [data-theme="dark"] .quiz-answer:hover,
-[data-theme="dark"] .quiz-answer.selected {
-  background: #a9cbb7;
-  border-color: #a9cbb7;
-  color: #080d0a;
+[data-theme="dark"] .quiz-answer.selected,
+[data-theme="dark"] .quiz-answer.selected:hover {
+  background: #a9cbb7 !important;
+  border-color: #a9cbb7 !important;
+  color: #080b09 !important;
+  font-weight: 700 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(169, 203, 183, 0.25);
 }
 
 [data-theme="dark"] .quiz-result-product {
@@ -591,6 +644,19 @@
 [data-theme="dark"] .site-footer {
   background: #050705;
   border-top: 1px solid rgba(169, 203, 183, 0.1);
+}
+
+[data-theme="dark"] .footer-social-link {
+  background: rgba(169, 203, 183, 0.08);
+  border-color: rgba(169, 203, 183, 0.18);
+  color: #a1b0a7;
+}
+
+[data-theme="dark"] .footer-social-link:hover {
+  background: #a9cbb7;
+  border-color: #a9cbb7;
+  color: #080d0a;
+  transform: translateY(-2px);
 }
 
 [data-theme="dark"] .product-image,
