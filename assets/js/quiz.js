@@ -1,4 +1,6 @@
 (function () {
+  const inPages = location.pathname.includes('/pages/');
+  const pagePrefix = inPages ? '' : 'pages/';
   const questions = [
     { q: 'How does your skin usually feel after cleansing?', answers: [['Comfortable', 'Normal'], ['Tight or thirsty', 'Dry'], ['Fresh, then shiny', 'Oily'], ['Different by zone', 'Combination']] },
     { q: 'Where does shine usually appear during the day?', answers: [['Rarely anywhere', 'Dry'], ['Mostly the T-zone', 'Combination'], ['Across most areas', 'Oily'], ['It varies', 'Normal']] },
@@ -53,10 +55,10 @@
         <h2>${type}-leaning skin</h2>
         <p>Your answers suggest a ${type.toLowerCase()}-leaning routine. Treat this as general cosmetic guidance rather than a diagnosis; skin can shift with season, environment and products.</p>
         <div class="quiz-result-products">
-          ${recommendations.map(product => `<a class="quiz-result-product" href="product-details.html?id=${product.id}"><img src="${product.image}" alt=""><strong>${product.name}</strong></a>`).join('')}
+          ${recommendations.map(product => `<a class="quiz-result-product" href="${pagePrefix}product-details.html?id=${product.id}"><img src="${product.image}" alt=""><strong>${product.name}</strong></a>`).join('')}
         </div>
         <div class="actions">
-          <a class="btn btn-primary" href="shop.html?skin=${encodeURIComponent(type)}">Shop recommended products</a>
+          <a class="btn btn-primary" href="${pagePrefix}shop.html?skin=${encodeURIComponent(type)}">Shop recommended products</a>
           <button class="btn btn-outline quiz-reset" type="button">Reset quiz</button>
         </div>
       </div>`;

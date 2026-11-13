@@ -12,7 +12,7 @@ From this directory:
 python3 -m http.server 8080
 ```
 
-Open `http://localhost:8080/`. The root entry redirects to `pages/index.html`.
+Open `http://localhost:8080/` to view the storefront homepage.
 
 ## Important launch notes
 

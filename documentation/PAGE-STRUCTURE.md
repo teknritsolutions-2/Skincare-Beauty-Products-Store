@@ -1,6 +1,6 @@
 # Page structure
 
-- `pages/index.html`: primary product-first storefront with inline skin finder
+- `index.html`: primary product-first storefront with inline skin finder
 - `pages/home2.html`: distinct editorial Daily Skin Journal with inline skin finder
 - `pages/shop.html`: filterable 24-product catalog
 - `pages/product-details.html`: one query-driven product template
